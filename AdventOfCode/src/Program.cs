@@ -4,10 +4,15 @@ if (args.Length == 0)
 }
 else if (args.Length == 1 && args[0].Contains("all", StringComparison.CurrentCultureIgnoreCase))
 {
+    var clearConsole = true;
+    if(Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true"){
+        clearConsole = false;
+    }
     await Solver.SolveAll(opt =>
     {
         opt.ShowConstructorElapsedTime = true;
         opt.ShowTotalElapsedTimePerDay = true;
+        opt.ClearConsole = clearConsole;
     });
 }
 else
