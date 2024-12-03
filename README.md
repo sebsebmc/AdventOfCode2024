@@ -1,6 +1,6 @@
-# AdventOfCode.Template
+# AdventOfCode
 
-![CI](https://github.com/eduherminio/AdventOfCode.Template/workflows/CI/badge.svg)
+![CI](https://github.com/sebsebmc/AdventOfCode2024/workflows/CI/badge.svg)
 
 Advent of Code template based on [AoCHelper](https://github.com/eduherminio/AoCHelper) project.
 
