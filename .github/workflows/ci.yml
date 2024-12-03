@@ -19,5 +19,5 @@ jobs:
       run: dotnet build -c Release
 
     - name: Solve all
-      run: dotnet run -c Release --no-build -- all
+      run: dotnet run -c Release --no-build --project=AdventOfCode\src -- all
       working-directory: ./AdventOfCode
