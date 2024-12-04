@@ -22,7 +22,6 @@ jobs:
       run: dotnet build -c Release
 
     - name: Solve all
-      run: | 
-        dotnet run -c Release --no-build --project=AdventOfCode/src -- all > log.txt 
-        ansi2html -n < log.txt >> $GITHUB_STEP_SUMMARY
+      run: |
+        dotnet run -c Release --no-build --project=AdventOfCode/src -- all
 

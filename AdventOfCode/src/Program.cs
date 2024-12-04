@@ -1,19 +1,26 @@
+using Spectre.Console;
+
 if (args.Length == 0)
 {
     await Solver.SolveLast(opt => opt.ClearConsole = false);
 }
 else if (args.Length == 1 && args[0].Contains("all", StringComparison.CurrentCultureIgnoreCase))
 {
-    var clearConsole = true;
+    Console.WriteLine(Environment.GetEnvironmentVariable("GITHUB_ACTION"));
     if(Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true"){
-        clearConsole = false;
+        AnsiConsole.Record();        
     }
     await Solver.SolveAll(opt =>
     {
         opt.ShowConstructorElapsedTime = true;
         opt.ShowTotalElapsedTimePerDay = true;
-        opt.ClearConsole = clearConsole;
+        opt.ShowOverallResults = false;
+        opt.ClearConsole = true;
     });
+    if(Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true"){
+        string text = AnsiConsole.ExportHtml();
+        Environment.SetEnvironmentVariable("GITHUB_STEP_SUMMARY", text);
+    }
 }
 else
 {
