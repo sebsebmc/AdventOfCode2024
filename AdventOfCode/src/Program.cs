@@ -8,7 +8,7 @@ else if (args.Length == 1 && args[0].Contains("all", StringComparison.CurrentCul
 {
     Console.WriteLine(Environment.GetEnvironmentVariable("GITHUB_ACTION"));
     if(Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true"){
-        AnsiConsole.Record();        
+        AnsiConsole.Record();
     }
     await Solver.SolveAll(opt =>
     {
@@ -19,7 +19,7 @@ else if (args.Length == 1 && args[0].Contains("all", StringComparison.CurrentCul
     });
     if(Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true"){
         string text = AnsiConsole.ExportHtml();
-        Environment.SetEnvironmentVariable("GITHUB_STEP_SUMMARY", text);
+        File.WriteAllText("results_log", text);
     }
 }
 else

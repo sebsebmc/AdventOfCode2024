@@ -24,4 +24,4 @@ jobs:
     - name: Solve all
       run: |
         dotnet run -c Release --no-build --project=AdventOfCode/src -- all
-
+        cat results_log >> $GITHUB_STEP_SUMMARY
