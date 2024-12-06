@@ -73,7 +73,7 @@ public class Day05 : BaseDay
             {
                 continue; //skip self
             }
-            if (por[update[j]].Contains(update[i]))
+            if (por.ContainsKey(update[j]) && por[update[j]].Contains(update[i]))
             {
                 // this page is not next
                 return false;
