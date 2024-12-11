@@ -59,7 +59,7 @@ public class Day06 : BaseDay
 
     public override ValueTask<string> Solve_2()  
     {
-        return new ValueTask<string>("Skpped for now, I need to actually do a walk for each possible new obstacle and make a deep copy of the map to do so");
+        return new ValueTask<string>("Skipped"); // I need to actually do a walk for each possible new obstacle and make a deep copy of the map to do so
         grid = new Grid(lines[0].Length, lines.Length);
         grid.Fill(lines);
         var idx = _input.IndexOf('^');
