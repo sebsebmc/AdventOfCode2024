@@ -79,17 +79,17 @@ public class Day09 : BaseDay {
         }
         map2.Add((-1, 1));
 
-        var oldLoc = 0;
+        var oldLoc = map2.Count - 1;
         while (maxId > 0) {
-            for (int i = map2.Count - 1; i >= 0; i--) {
+            for (int i = oldLoc; i >= 0; i--) {
                 if (map2[i].id == maxId) {
                     oldLoc = i;
                     break;
                 }
             }
-            if(oldLoc < firstFreeIdx){
+            if (oldLoc < firstFreeIdx) {
                 break;
-            } 
+            }
             for (int i = firstFreeIdx; i < map2.Count; i++) {
                 var (id, size) = map2[i];
                 if (id == map2[oldLoc].id) {
