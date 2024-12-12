@@ -19,6 +19,7 @@ public class Tests
     [TestCase(typeof(Day06), "41", "Skipped")]
     [TestCase(typeof(Day07), "3749", "11387")]
     [TestCase(typeof(Day08), "14", "34")]
+    [TestCase(typeof(Day09), "1928", "2858")]
     public async Task Test(Type type, string sol1, string sol2)
     {
         // Can't use BaseDay since some of them aren't days, but you probably can
