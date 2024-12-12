@@ -49,7 +49,7 @@ public class Day07 : BaseDay
             var all = (int)Math.Pow(3, operators);
             for (int i = 0; i < all; i++)
             {
-                if(Evaluate(cal.Ints, ToBase3(i, operators)) == cal.Target){
+                if(Evaluate3(cal.Ints, i) == cal.Target){
                     sum += cal.Target;
                     break;
                 }
@@ -60,10 +60,7 @@ public class Day07 : BaseDay
 
     private string ToBase3(int num, int length){
         StringBuilder builder = new StringBuilder(length);
-        while(num > 0) {
-            builder.Append(num % 3);
-            num /= 3;
-        }
+
         while(builder.Length < length){
             builder.Append('0');
         }
@@ -83,18 +80,20 @@ public class Day07 : BaseDay
         return temp;
     }
 
-    private long Evaluate(List<int> numbers, string ops){
+    private long Evaluate3(List<int> numbers, int bitset){
         long temp = numbers[0];
         for (int i = 1; i < numbers.Count; i++)
         {
-            switch(ops[i-1]){
-                case '0':
+            int op = bitset % 3;
+            bitset /= 3;
+            switch(op){
+                case 0:
                     temp += numbers[i];
                     break;
-                case '1':
+                case 1:
                     temp *= numbers[i];
                     break;
-                case '2':
+                case 2:
                     var n = numbers[i];
                     while(n > 0) {
                         temp *= 10;
