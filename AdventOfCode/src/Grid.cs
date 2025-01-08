@@ -1,6 +1,10 @@
 namespace AdventOfCode;
 
+using System;
 using Direction = (int dy, int dx);
+
+
+public record Coordinate(int Y, int X);
 
 public class Grid {
     public char[,] state;
@@ -53,6 +57,10 @@ public class Grid {
         return true;
     }
 
+    public char At(Coordinate coord) {
+        return state[coord.Y, coord.X];
+    }
+
     public bool IsValid((int y, int x) coord) {
         return coord.y >= 0 && coord.x >= 0 && coord.y < this.Height && coord.x < this.Width;
     }
@@ -60,6 +68,15 @@ public class Grid {
     public bool IsValid((int y, int x) coord, Direction dir) {
         return coord.y + dir.dy >= 0 && coord.x + dir.dx >= 0 &&
             coord.y + dir.dy < this.Height && coord.x + dir.dx < this.Width;
+    }
+
+    public bool IsValid(Coordinate coord) {
+        return coord.Y >= 0 && coord.X >= 0 && coord.Y < this.Height && coord.X < this.Width;
+    }
+
+    public bool IsValid(Coordinate coord, Direction dir) {
+        return coord.Y + dir.dy >= 0 && coord.X + dir.dx >= 0 &&
+            coord.Y + dir.dy < this.Height && coord.X + dir.dx < this.Width;
     }
 
     public static Direction RotateRight(Direction dir) {
@@ -80,4 +97,15 @@ public class Grid {
         }
     }
 
+    public List<Coordinate> FindAll(char v) {
+        var res = new List<Coordinate>();
+        for (int i = 0; i < Height; i++) {
+            for (int j = 0; j < Width; j++) {
+                if(state[i,j] == v) {
+                    res.Add(new Coordinate(i, j));
+                }
+            }
+        }
+        return res;
+    }
 }
