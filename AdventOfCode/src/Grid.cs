@@ -1,6 +1,7 @@
 namespace AdventOfCode;
 
 using System;
+using System.Reflection.Metadata;
 using Direction = (int dy, int dx);
 
 
@@ -61,6 +62,10 @@ public class Grid {
         return state[coord.Y, coord.X];
     }
 
+    public char At(Coordinate coord, Direction d) {
+        return state[coord.Y + d.dy, coord.X+d.dx];
+    }
+
     public bool IsValid((int y, int x) coord) {
         return coord.y >= 0 && coord.x >= 0 && coord.y < this.Height && coord.x < this.Width;
     }
@@ -107,5 +112,17 @@ public class Grid {
             }
         }
         return res;
+    }
+
+    public static Direction RotateLeft((int dy, int dx) dir) {
+        for (int i = 0; i < AllDirs.Length; i++) {
+            if (AllDirs[i] == dir) {
+                if(i < 2){
+                    return AllDirs[AllDirs.Length - (2-i)];
+                }
+                return AllDirs[(i - 2)];
+            }
+        }
+        throw new InvalidDataException("Not a valid direction");
     }
 }

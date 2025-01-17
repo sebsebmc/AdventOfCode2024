@@ -45,8 +45,6 @@ public class Day11 : BaseDay {
             next = new Dictionary<long, int>();   
         }
 
-        System.Console.WriteLine(cur);
-
         return new ValueTask<string>($"{cur.Sum(x => x.Value)}");
     }
 
