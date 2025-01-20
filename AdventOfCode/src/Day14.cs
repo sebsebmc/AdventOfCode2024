@@ -54,34 +54,37 @@ public class Day14 : BaseDay {
     public override ValueTask<string> Solve_2() {
         // Assuming that the arrangement means no overlapping robots, we need to find a value of t such that
         // r.x + (r.dx * t) % width and r.y + (r.dy * t) % height all produce unique values
-        Dictionary<Coordinate, List<Robot>> locations = [];
-        Dictionary<Coordinate, List<Robot>> temp = [];
 
-        foreach (var robot in robots) {
-            locations[new Coordinate(robot.Y, robot.X)] = [robot];
-        }
         var steps = 0;
         while (true) {
-            var overlapping = 0;
-            foreach (var (coord, robots) in locations) {
-                foreach (var robot in robots) {
-                    var finalX = ((coord.X + (robot.Dx)) % WIDTH + WIDTH) % WIDTH;
-                    var finalY = ((coord.Y + (robot.Dy)) % HEIGHT + HEIGHT) % HEIGHT;
-                    var ncoord = new Coordinate(finalY, finalX);
-                    var l = temp.GetValueOrDefault(ncoord, []);
-                    if (l.Count > 0) {
-                        overlapping += 1;
-                    }
-                    l.Add(robot);
-                    temp[ncoord] = l;
+            HashSet<Coordinate> taken = [];
+            foreach (var robot in robots) {
+                var finalX = ((robot.X + (robot.Dx * steps)) % WIDTH + WIDTH) % WIDTH;
+                var finalY = ((robot.Y + (robot.Dy * steps)) % HEIGHT + HEIGHT) % HEIGHT;
+                var ncoord = new Coordinate(finalY, finalX);
+                if(taken.Contains(ncoord)){
+                    steps += 1;
+                    goto Overlap;
+                }
+                taken.Add(ncoord);
+            }
+            return new ValueTask<string>($"{steps}");
+            
+            Overlap:
+                continue;
+        }
+    }
+
+    private void PrintGridDict(HashSet<Coordinate> slookup) {
+        for (int i = 0; i < HEIGHT; i++) {
+            for (int j = 0; j < WIDTH; j++) {
+                if(slookup.Contains(new Coordinate(i, j))){
+                    Console.Write("X");
+                }else {
+                    Console.Write(" ");
                 }
             }
-            steps += 1;
-            locations = temp;
-            temp = [];
-            if (overlapping == 0) {
-                return new ValueTask<string>($"{steps}");
-            }
+            System.Console.WriteLine();
         }
     }
 
