@@ -1,8 +1,4 @@
 
-using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-
 namespace AdventOfCode;
 
 public class Day12 : BaseDay {
